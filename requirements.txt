@@ -1,5 +1,4 @@
 streamlit
-python-3.11.6
 torch
 torchaudio
 TTS==0.22.0

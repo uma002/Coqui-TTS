@@ -2,28 +2,17 @@ import streamlit as st
 from TTS.api import TTS
 import os
 
-# Define available voice models
-VOICE_MODELS = {
-    "LJSpeech (US Female) - Tacotron2-DDC": "tts_models/en/ljspeech/tacotron2-DDC",
-    "VCTK (UK Male) - VITS": "tts_models/en/vctk/vits"
-}
-
-st.set_page_config(page_title="Coqui TTS App", layout="centered")
-st.title("Coqui TTS Text-to-Speech Converter")
+st.set_page_config(page_title="Simple Coqui TTS App", layout="centered")
+st.title("Simple Coqui TTS Text-to-Speech Converter")
 st.markdown("Enter text below and convert it to speech using Coqui TTS.")
-
-# Sidebar: Use a selectbox for voice model selection
-st.sidebar.header("Voice Settings")
-voice_choice = st.sidebar.selectbox("Select Voice Model:", list(VOICE_MODELS.keys()), index=0)
 
 # Main text input
 user_input = st.text_area("Enter text:", height=150)
 
 if st.button("Convert to Speech"):
     if user_input.strip():
-        # Load the selected TTS model
-        model_name = VOICE_MODELS[voice_choice]
-        tts_model = TTS(model_name=model_name, progress_bar=False, gpu=False)
+        # Use the LJSpeech model (female voice) which does not require espeak
+        tts_model = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False, gpu=False)
         
         output_path = "output.wav"
         # Generate speech and save to output file

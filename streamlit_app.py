@@ -1,29 +1,28 @@
 import streamlit as st
 from TTS.api import TTS
-import os
 import soundfile as sf
+import os
 
 # Configure the Streamlit page
 st.set_page_config(page_title="Coqui TTS Converter", layout="centered")
 st.title("🎤 Coqui TTS Text-to-Speech Converter")
 st.markdown("Enter text below and convert it to speech using Coqui TTS.")
 
-# User input text
+# Text input for conversion
 user_input = st.text_area("Enter text to convert to speech:", height=150)
 
 if st.button("Convert to Speech"):
     if user_input.strip():
-        # Initialize the TTS model
-        # This example uses the pre-trained model "tts_models/en/ljspeech/tacotron2-DDC"
+        # Initialize the TTS model (using a pre-trained model from Coqui TTS)
         tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False, gpu=False)
         
-        # Define the output file path
+        # Define output file path
         output_path = "output.wav"
         
-        # Generate speech and save to file
+        # Generate speech and save to output file
         tts.tts_to_file(text=user_input, file_path=output_path)
         
-        # Play the generated audio in the app
+        # Display the audio in the app
         st.audio(output_path, format="audio/wav")
         
         # Provide a download button for the audio file

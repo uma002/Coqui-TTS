@@ -8,8 +8,8 @@ VOICE_MODELS = {
     "VCTK (UK Male) - VITS": "tts_models/en/vctk/vits"
 }
 
-st.set_page_config(page_title="Simple Coqui TTS App", layout="centered")
-st.title("Coqui TTS Text-to-Speech Converter")
+st.set_page_config(page_title="Coqui TTS App", layout="centered")
+st.title("Coqui TTS Text-to-Speech Converter",layout="centered")
 st.markdown("Enter text below and convert it to speech using Coqui TTS.")
 
 # Sidebar: Use a selectbox for voice model selection

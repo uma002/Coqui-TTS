@@ -1,4 +1,4 @@
-name: my-streamlit-app
+name: coqui-tts-app
 channels:
   - conda-forge
   - defaults
@@ -12,3 +12,4 @@ dependencies:
       - TTS==0.22.0
       - soundfile
       - numpy
+      - pydub

@@ -1,33 +1,36 @@
 import streamlit as st
-import torch
-import numpy as np
-import soundfile as sf
 from TTS.api import TTS
+import os
+import soundfile as sf
 
-# Load TTS model (ensure you have a supported model installed)
-MODEL_NAME = "tts_models/en/ljspeech/tacotron2-DDC"
-tts = TTS(MODEL_NAME).to("cpu" if not torch.cuda.is_available() else "cuda")
-
-# Streamlit App UI
-st.title("Text-to-Speech Converter (Coqui TTS)")
-
-# Sidebar settings
-st.sidebar.header("Settings")
-selected_voice = st.sidebar.selectbox("Select Voice", ["LJSpeech (Default)"])
-speed = st.sidebar.slider("Speed", 0.5, 1.5, 1.0)  # Adjust speech speed
+# Configure the Streamlit page
+st.set_page_config(page_title="Coqui TTS Converter", layout="centered")
+st.title("🎤 Coqui TTS Text-to-Speech Converter")
+st.markdown("Enter text below and convert it to speech using Coqui TTS.")
 
 # User input text
-user_input = st.text_area("Enter text to convert to speech:", "")
+user_input = st.text_area("Enter text to convert to speech:", height=150)
 
 if st.button("Convert to Speech"):
-    if user_input:
-        # Generate speech
-        output_wav = "output.wav"
-        tts.tts_to_file(text=user_input, file_path=output_wav, speed=speed)
-
-        # Load and play the generated audio
-        audio_data, samplerate = sf.read(output_wav)
-        st.audio(audio_data, format="audio/wav", sample_rate=samplerate)
+    if user_input.strip():
+        # Initialize the TTS model
+        # This example uses the pre-trained model "tts_models/en/ljspeech/tacotron2-DDC"
+        tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False, gpu=False)
+        
+        # Define the output file path
+        output_path = "output.wav"
+        
+        # Generate speech and save to file
+        tts.tts_to_file(text=user_input, file_path=output_path)
+        
+        # Play the generated audio in the app
+        st.audio(output_path, format="audio/wav")
+        
+        # Provide a download button for the audio file
+        with open(output_path, "rb") as f:
+            audio_bytes = f.read()
+        st.download_button("Download Audio", audio_bytes, file_name="output.wav", mime="audio/wav")
+        
+        st.success("✅ Speech generated successfully!")
     else:
-        st.warning("Please enter text before converting.")
-
+        st.warning("⚠️ Please enter some text to convert.")

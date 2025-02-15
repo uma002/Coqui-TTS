@@ -1,0 +1,14 @@
+name: my-streamlit-app
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.11
+  - pip
+  - pip:
+      - streamlit
+      - torch
+      - torchaudio
+      - TTS==0.22.0
+      - soundfile
+      - numpy

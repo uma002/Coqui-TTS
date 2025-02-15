@@ -1,6 +1,6 @@
 streamlit
 torch
 torchaudio
-TTS
+TTS==0.22.0
 soundfile
 numpy

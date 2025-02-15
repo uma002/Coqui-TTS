@@ -9,7 +9,7 @@ VOICE_MODELS = {
 }
 
 st.set_page_config(page_title="Simple Coqui TTS App", layout="centered")
-st.title("Simple Coqui TTS Text-to-Speech Converter")
+st.title("Coqui TTS Text-to-Speech Converter")
 st.markdown("Enter text below and convert it to speech using Coqui TTS.")
 
 # Sidebar: Use a selectbox for voice model selection

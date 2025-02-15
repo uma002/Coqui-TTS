@@ -12,13 +12,9 @@ st.set_page_config(page_title="Simple Coqui TTS App", layout="centered")
 st.title("Simple Coqui TTS Text-to-Speech Converter")
 st.markdown("Enter text below and convert it to speech using Coqui TTS.")
 
-# Sidebar: Available pre-trained models using a select slider
+# Sidebar: Use a selectbox for voice model selection
 st.sidebar.header("Voice Settings")
-voice_choice = st.sidebar.select_slider(
-    "Select Voice Model:",
-    options=list(VOICE_MODELS.keys()),
-    value="LJSpeech (US Female) - Tacotron2-DDC"
-)
+voice_choice = st.sidebar.selectbox("Select Voice Model:", list(VOICE_MODELS.keys()), index=0)
 
 # Main text input
 user_input = st.text_area("Enter text:", height=150)

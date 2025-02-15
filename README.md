@@ -1,7 +1,5 @@
-# 📦cCOQUI TTS
-```
-⬆️ (Replace above with your app's name)
-```
+# 📦COQUI TTS
+
 
 Description of the app ...
 
